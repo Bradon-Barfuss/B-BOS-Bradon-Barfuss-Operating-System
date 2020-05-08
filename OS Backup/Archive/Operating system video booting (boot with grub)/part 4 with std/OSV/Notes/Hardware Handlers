@@ -1,0 +1,29 @@
+see Operating System #15 Interrupt Handling Explained in Detail
+https://www.youtube.com/watch?v=V1TJ6b6_EjM 
+
+What would happen if there was a interupt
+if a device asserts interrupt line  (PIC or device)
+1. first it the cpu will senses the interrupt line and obtains the Interupt number from the PIC (CPU)
+2. switch to kernel stack and privilage levels (CPU)
+3. The current program is stopped and saved(CPU)
+4. the processor will jump to the interupt handler (CPU)
+6. return from interrupt (CPU)
+
+2.1 Stacks:
+Each process has two stacks
+- a user space stack: where the user space information is
+- kernel space stack: where the kernel points to the processes are or function calls
+2.1.2 Why do we switch stacks:
+- the user processes can't access the kernel stack
+2.1.3 How to switch stacks?
+it is done by the Task Segment Desciptor, which changes the stack segment (SS) and the stack segment pointer (ESP)
+2.1.4 The privilege level changes to ring 3 to ring 0 
+
+3.1 The process is saved:
+-we do this so the process can continue after the handler is completed
+-To save the process state, we will use the kernel stack, and save all the registers such as SS, ESP, FLAGS, Erro code, etc
+
+4. How to jump into the interupt handler see 6:30 //important
+4.1: The processer will use the IRQ number or the interrupt vector to 
+index or jump into the IDT (interrupt Data Table). We will then get the segment selector and a offset to jump into the interrupt procedure address
+and run the procedure.

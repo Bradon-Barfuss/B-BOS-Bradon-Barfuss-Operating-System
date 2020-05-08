@@ -1,0 +1,143 @@
+PCI NOTES:
+
+System Arctiecture 6: PCI Basics and Bus Enumeration:
+
+The PCI stands for Peripheral Component Interconnect
+- It is virtually the only bus computer systems
+- Bus: is a communication system that transfers data between components inside a computer
+- A PCI contains it own registers, that contain information about the connected device
+- A PCI bridge is is hardware connection between two different buses. Meaning you can have many layers of buses in the PCI
+- The main or first bridge is a host bridge, and is also emblumented as a chip set
+- chip set is the combination of the number of different controlers
+- 32-bit card has connection 1 through 62.
+- 64-bit card has 94 connections
+- address and data buses are labed as AD(lower^0)--AD(lower^64), and can multiplex
+- multiplexing: is the ability to send multiple signals combined in one signal.
+- The PCI ADDRESS appears on AD(lower^0)--AD(lower^31) and is multiplexed with data
+- PCI contains 256-byte memory to allow the PC to interrogate the PCI interface
+- Interrogate: means to search, count or test the condition of status of a device.
+- This allows for the system to automatically configure itself for the PCI plug-board, also called plug-and-play(PnP)
+- the first 64 bytes contain information about the PCI interface
+- the first 32-bit doubleword(4 bytes or 32-bits) contains the unit ID code and the vendor ID code
+- The configuration space contains the registers that store important information about the device.
+- configuration space table
+
+Location : (if ##H Decimal Number) : Discription: Size
+(0-Byte) 00H: Header : 64 bytes
+	(0-Byte) : 00H : The first doubleword (4-bytes or 32-bits) Contain:
+		(0-2 Byte): Vendor ID (2-Byte or 16-bit)
+		(2-4 Byte): Device ID (2-Byte or 16-bit)
+	(4-Byte) : 04H : The second double word contain:
+		(4-6 Byte): Command : (2-Byte or 16-bit)
+		(6-8 Byte): Status : (2-Byte or 16-bit)
+	(8-Byte) : 08H : The third doubleword:
+		(8-9 Byte) : Revision ID : (1-byte or 8-bits)
+		(9-12 Byte) : Class Code : (3-Bytes or 24-bits)
+	(12-Byte) : 0CH : The fourth doubleword
+		(12-13 Byte)
+    ...
+    ...
+    ...
+		
+Write Your OS 10:
+- The PCI or Peripheral Component Interconnect is a component used for allowing multiple devices and drivers
+be used without spefically setting each one
+- The Peripheral Component Interconnect has up to 8 connections/buses.
+- On every bus you can have up to 32 devices
+- Every Devices can have up to 8 functions, a function is like a sound card as a audio capture or soundcard i.e. Having multiple function.
+- We have Ports : 8, Devices : 32, Functions : 8, so we will need 3-bits for ports, 5-bits for devices, and 3-bits for functions
+- When we ask the PCI what is Bus # Device #, it will return a
+    uint16_t vendor_id : who is making it
+    uint16_t device_id : what device number is it for that vendor
+    ....
+    uint8_t class_id: if we want to get the VGA driver, we will just look at the class_id to get it
+    uint8_t subclass_id
+    
+- The Peripheral component interconnect has a port of 32-bit
+- When we read data from devices, they have memory locations and have a standerized memory space. So we will have to read the offset
+of the memory where we would find the vendor_id, device_id, etc
+- We will combine the port/bus, device, and function number into one identifier to send to the PCI
+- An Identifier is a name that is assigned by the user for a program element such as variable, type, template, etc.
+- If you want information out of the indentifier, like the bus, device, function, you will get the whole indentifier, and select the byte out of the 32bit indentifier
+- What we want to do is give the driver manager to the PCI and have the PCI talk to the Driver Manager, and insert the drivers on the PCI
+- If the Vendor_id is all zeros or ones, that means it is empty
+
+
+System Architecture 7: Accessing PCIe Config Registers:
+- There are 256 Buses (really 8 in my case)
+in each buses are 32 Devices
+in each device are 8 Functions
+In each function they are either are going to have 256bytes for PCI or 4kb for PCI express, they are config registers
+- We first must write to our IO port 0xCF8, called the Index Registers
+- and Read on Right called 0xCFC, called the data registers
+
+
+00:02.0 **VGA** compatible controller: Intel Corporation UHD Graphics 620 (rev 07)
+
+00:02.0 0300: 8086:5917 (rev 07)
+
+
+lspci:
+
+00:00.0 Host bridge: Intel Corporation Xeon E3-1200 v6/7th Gen Core Processor Host Bridge/DRAM Registers (rev 08)
+00:02.0 VGA compatible controller: Intel Corporation UHD Graphics 620 (rev 07)
+00:14.0 USB controller: Intel Corporation Sunrise Point-LP USB 3.0 xHCI Controller (rev 21)
+00:14.2 Signal processing controller: Intel Corporation Sunrise Point-LP Thermal subsystem (rev 21)
+00:15.0 Signal processing controller: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #0 (rev 21)
+00:15.1 Signal processing controller: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #1 (rev 21)
+00:15.2 Signal processing controller: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #2 (rev 21)
+00:16.0 Communication controller: Intel Corporation Sunrise Point-LP CSME HECI #1 (rev 21)
+00:17.0 SATA controller: Intel Corporation Sunrise Point-LP SATA Controller [AHCI mode] (rev 21)
+00:1c.0 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #1 (rev f1)
+00:1c.4 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #5 (rev f1)
+00:1c.5 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #6 (rev f1)
+00:1d.0 PCI bridge: Intel Corporation Sunrise Point-LP PCI Express Root Port #9 (rev f1)
+00:1f.0 ISA bridge: Intel Corporation Intel(R) 100 Series Chipset Family LPC Controller/eSPI Controller - 9D4E (rev 21)
+00:1f.2 Memory controller: Intel Corporation Sunrise Point-LP PMC (rev 21)
+00:1f.3 Audio device: Intel Corporation Sunrise Point-LP HD Audio (rev 21)
+00:1f.4 SMBus: Intel Corporation Sunrise Point-LP SMBus (rev 21)
+01:00.0 3D controller: NVIDIA Corporation GM108M [GeForce MX130] (rev a2)
+02:00.0 Unassigned class [ff00]: Realtek Semiconductor Co., Ltd. RTS5229 PCI Express Card Reader (rev 01)
+03:00.0 Network controller: Qualcomm Atheros QCA6174 802.11ac Wireless Network Adapter (rev 32)
+04:00.0 Non-Volatile memory controller: Samsung Electronics Co Ltd NVMe SSD Controller SM981/PM981
+bradon@bradon-Lenovo-ideapad-FLEX-5-1570:~/OS$ 
+
+lspci -n
+
+00:00.0 0600: 8086:5914 (rev 08)
+00:02.0 0300: 8086:5917 (rev 07)
+00:14.0 0c03: 8086:9d2f (rev 21)
+00:14.2 1180: 8086:9d31 (rev 21)
+00:15.0 1180: 8086:9d60 (rev 21)
+00:15.1 1180: 8086:9d61 (rev 21)
+00:15.2 1180: 8086:9d62 (rev 21)
+00:16.0 0780: 8086:9d3a (rev 21)
+00:17.0 0106: 8086:9d03 (rev 21)
+00:1c.0 0604: 8086:9d10 (rev f1)
+00:1c.4 0604: 8086:9d14 (rev f1)
+00:1c.5 0604: 8086:9d15 (rev f1)
+00:1d.0 0604: 8086:9d18 (rev f1)
+00:1f.0 0601: 8086:9d4e (rev 21)
+00:1f.2 0580: 8086:9d21 (rev 21)
+00:1f.3 0403: 8086:9d71 (rev 21)
+00:1f.4 0c05: 8086:9d23 (rev 21)
+01:00.0 0302: 10de:174d (rev a2)
+02:00.0 ff00: 10ec:5229 (rev 01)
+03:00.0 0280: 168c:003e (rev 32)
+04:00.0 0108: 144d:a808
+
+
+lspci -x:
+
+
+lsusb
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 001 Device 005: ID 0cf3:e300 Atheros Communications, Inc. 
+Bus 001 Device 004: ID 06cb:0081 Synaptics, Inc. 
+Bus 001 Device 003: ID 04f2:b5d9 Chicony Electronics Co., Ltd 
+Bus 001 Device 002: ID 062a:4102 Creative Labs 
+Bus 001 Device 054: ID 04e8:6860 Samsung Electronics Co., Ltd Galaxy (MTP)
+Bus 001 Device 007: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+bradon@bradon-Lenovo-ideapad-FLEX-5-1570:~/OS$ lspci
+

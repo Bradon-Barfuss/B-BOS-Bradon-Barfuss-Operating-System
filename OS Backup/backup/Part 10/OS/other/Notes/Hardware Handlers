@@ -1,0 +1,65 @@
+see Operating System #15 Interrupt Handling Explained in Detail
+https://www.youtube.com/watch?v=V1TJ6b6_EjM 
+
+What would happen if there was a interupt
+if a device asserts interrupt line  (PIC or device)
+1. first it the cpu will senses the interrupt line and obtains the Interupt number from the PIC (CPU)
+2. switch to kernel stack and privilage levels (CPU)
+3. The current program is stopped and saved(CPU)
+4. the processor will jump to the interupt handler (CPU)
+6. return from interrupt (CPU)
+
+2.1 Stacks:
+Each process has two stacks
+- a user space stack: where the user space information is
+- kernel space stack: where the kernel points to the processes are or function calls
+2.1.2 Why do we switch stacks:
+- the user processes can't access the kernel stack
+2.1.3 How to switch stacks?
+it is done by the Task Segment Desciptor, which changes the stack segment (SS) and the stack segment pointer (ESP)
+2.1.4 The privilege level changes to ring 3 to ring 0 
+
+3.1 The process is saved:
+-we do this so the process can continue after the handler is completed
+-To save the process state, we will use the kernel stack, and save all the registers such as SS, ESP, FLAGS, Erro code, etc
+
+4. How to jump into the interupt handler see 6:30 //important
+4.1: The processer will use the IRQ number or the interrupt vector to 
+index or jump into the IDT (interrupt discriptor Table). We will then get the segment selector and a offset to jump into the interrupt procedure address
+and run the procedure.
+
+Part 4:
+Hardware communication
+
+This is the part where we will communicate with the hardware
+When you interact with a hardware piece, it will send a signal to the PIC (Programmical interupt controler).
+if we want to get the data from the PIC, we need to program the PIC to send us the information. To do this
+we will have a multplexer and a decomplexer. //look up more info//. We will send data or a number to these
+complexers and they will send or recive data from a port. 
+
+In assembly there is a command called "outb" that is used to do this. Because we are writing this in C++, 
+we will use the asm("") command to use assembly code. 
+
+
+See Operating system part 5
+This is the point where we will begin communicating with the hardware
+When we hit a key on the keyboard, it will send a singal to the PIC(programmable intercupt controller).
+Initially the PIC is not set to send anything to the CPU, so we will have to setup the PIC to send us the information.
+The information the PIC will send us will be in a form a of interupt, so we have to set up a interupt discriptor table 
+inorder to read and understand the data.
+
+So before we can tell the PIC to send us this information, we need to setup the Interupt discriptor table.
+The parts of a interupt Discriptor Table (IDT) are: intreupt number, base address (where to jump), access flags, segments
+1. uint8_t interupt number
+2. void pointer: handler or base address
+3. flags
+4. segments: to swtich to a certin segent before doing a handler
+5. Access rights: ring 0 - 3
+
+
+
+
+for the spefic layout of the IDT see https://wiki.osdev.org/Interrupt_Descriptor_Table
+The first entry (at zero offset) is used in the IDT.
+There are 256 interrupts (0..255), so IDT should have 256 entries, each entry corresponding to a specific interrupt.
+It can contain more or less than 256 entries. More entries are ignored. When an interrupt or exception is invoked whose entry is not present, a GPF is raised that tells the number of the missing IDT entry, and even whether it was hardware or software interrupt. There should therefore be at least enough entries so a GPF can be caught

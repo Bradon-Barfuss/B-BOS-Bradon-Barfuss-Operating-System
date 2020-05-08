@@ -1,0 +1,56 @@
+The main purpose of a linker file is how the sections of input files should be mapped into output file.
+
+Here are some key words based on OSdev linker scripts
+
+ENTRY: is where the entry point of the linked program/kernel (or the first byte of the .text section_
+
+OUTPUT_FORMAT: Specifies what the output format of your executable. To find out what formates your binuitls and GC supports, us "objdump -i"
+
+STARTUP: is which file you want to linked at the very beginning of the executable. This is usually crt0.o or crtbegin.o. For kernels, it usually the file that contains your assembly boilerplate that initates the stack sometimes GDT and then calls kmain()
+
+SEARCH_DIR: This will add a path to your library search director. The -nostdlib (no standard libary) flag will cause any found library library found in this path to be ignored. The linker will treat script specified search directories as standard directories, and therefore ignores them with -no-default-libs
+
+INPUT: Is where you can add object files inside the linker program
+
+OUTPUT: Is where you can pick the output name and type of the new file
+
+MEMORY: declares one or more memory regions defining if they can be written, read, or executed.
+
+[SOURCE WARE INFO]
+BASIC SCRIPT CONCEPTS
+
+The output of a linker is normal an executable. Each object file has a list of sections. Each section has a name and a size. Sections normal have associated blocks of data, called section contents. If a section is called loadable, it should be loaded into memory when the output file is run. If a section has no contents, it may be allocatable.
+
+Every loadable or allocatable output section has 2 address. The first is VMA, or virtual Memory address, where the address of the section will have the output is run. The LMA or Load Memory Address is where the sections will be loaded. Most of the time these are the same address. 
+
+You can see the object file sections by using objdump -h
+
+SIMPLE LINKER SCRIPT EXAMPLE:
+
+SECTIONS
+{
+  . = 0x10000;
+  .text : { *(.text) }
+  . = 0x8000000;
+  .data : { *(.data) }
+  .bss : { *(.bss) }
+}
+
+SECTION: is used to describe the memory layout of output file
+
+the . = 0x10000 is where the .text data will start
+the . = 0x8000000 is where the data will start
+'.' is the location counter
+if you don't define a section counter, it will default to it current location
+
+
+SIMPLE ASSIGNMENTS:
+
+Constants: all constants are intergers. The linker wants a 0 to be octal and 0x to be hexadecimal. You can also add suffixes 'K' and 'M' to scale a constant by 1024 or 1024*1024;
+.4k = 4096
+.4m = 4194304
+.m = 1048576
+
+SOURCES:
+https://sourceware.org/binutils/docs/ld/Scripts.html#Scripts
+https://wiki.osdev.org/Linker_Scripts

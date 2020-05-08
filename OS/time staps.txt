@@ -1,0 +1,125 @@
+// In GMT, so no offset
+Write your own Operating System in 1 hour
+1.Tuesday, September 10, 2019
+2. Friday, September 13, 2019
+3. Friday, September 27, 2019
+4. Monday, November 11, 2019
+5. Tuesday, December 3, 2019
+6. Wednesday, December 4, 2019 I think it started here
+7. Monday, December 9, 2019
+8. Friday, December 13, 2019 Probaly ended here
+9. Tuesday, December 24, 2019
+...
+Write your own Operating System 2: Install your OS in a Virtual Machine:
+1. Monday, November 11, 2019
+2. Monday, December 9, 2019 
+3. Friday, December 13, 2019
+
+Write your own Operating System 3: Memory Segments, Global Descriptor Table:
+1. Thursday, September 12, 2019
+2. Monday, November 11, 2019
+3. Tuesday, December 3, 2019 
+4. Friday, December 13, 2019 started here
+5. Thursday, December 19, 2019  Probaly ended here
+
+Write your own Operating System 4: Hardware-Communication / Ports:
+1. Monday, November 11, 2019 
+2. Monday, December 16, 2019 
+3. Friday, December 20, 2019 
+4. Wednesday, December 25, 2019 //worked on this during christmas, my life
+5. Thursday, December 26, 2019 //got wisdom teeth this day
+6. Friday, December 27, 2019 
+7. Saturday, December 28, 2019
+8. Thursday, January 2, 2020
+9. Monday, January 6, 2020 
+
+Write your own Operating System 5: Interrupts
+1. Tuesday, November 12, 2019 
+2. Friday, December 27, 2019 //Probaly started here
+3. Saturday, December 28, 2019
+4. Monday, December 30, 2019 
+5. Thursday, January 2, 2020
+6. Monday, January 6, 2020 
+7. Tuesday, January 7, 2020//done here
+8. Friday, February 7, 2020
+
+Write your own Operating System 6: Keyboard
+1. Wednesday, November 13, 2019
+2. Tuesday, December 3, 2019
+3. Saturday, December 28, 2019
+4. Thursday, January 2, 2020
+5. Monday, January 6, 2020 //started here
+6. Tuesday, January 14, 2020
+7. Tuesday, January 21, 2020
+8. Thursday, January 23, 2020
+9. Thursday, February 6, 2020//Done
+10. Saturday, February 8, 2020 
+11. Sunday, February 9, 2020
+
+Write your own Operating System 7: Mouse
+1. Wednesday, November 13, 2019
+2. Monday, January 6, 2020
+3. Thursday, February 6, 2020 //Started
+4. Friday, February 7, 2020
+5. Saturday, February 8, 2020 
+6. Tuesday, February 25, 2020 Done
+
+Write your own Operating System 8: Abstractions for Drivers
+1. Wednesday, November 13, 2019
+2. Saturday, February 8, 2020 
+3. Monday, February 24, 2020 Started
+4. Tuesday, February 25, 2020
+5. Thursday, February 27, 2020 Done
+
+Write your own Operating System 9: Tidying up
+1. Monday, February 24, 2020
+2. Tuesday, February 25, 2020
+3. Thursday, February 27, 2020 
+4. Friday, February 28, 2020
+5. Saturday, February 29, 2020 
+
+Write your own Operating System 10: Peripheral Component Interconnect (PCI)
+1. Wednesday, November 13, 2019 
+2. Friday, February 28, 2020
+3. Saturday, February 29, 2020
+
+Write your own Operating System 11: Base Address Registers
+1. Saturday, February 29, 2020 
+
+Write your own Operating System 12: Graphics Mode (VGA)
+1. Sunday, February 9, 2020 
+2. Friday, February 28, 2020
+3. Monday, March 2, 2020
+4. Tuesday, March 3, 2020
+
+Write your own Operating System 13: GUI Framework Basics
+1. Monday, March 2, 2020
+2. Tuesday, March 3, 2020 
+3. Wednesday, March 4, 2020 
+
+Write your own Operating System 14: Desktop and Windows
+1. Tuesday, March 3
+2. Wednesday, March 4, 2020 
+3. Saturday, March 7, 2020
+4. Wednesday, March 11, 2020
+5. Monday, April 6, 2020 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+Nandland Go Board Porject 9 - Introdction to VGA
+https://www.youtube.com/watch?v=7wjTJivsNMM&t=298s
+
+There are 4 different sections of the VGA monitor:
+Active area: HSync = 1, VSync = 1, Means that it is visable on the screen
+Horizontal Blanking: H Sync = 0, Vsync = 1, Where information is being sent to the screen, but nothing is registering in the vertical area
+Vertical Blanking: HSync = 1, Vsync Where information is being sent to the screen, but nothing is registering except in the vertical area
+There are 5 things that add up to the whole area of the screen:
+Whole area: I.e. the whole area
+Visible Area: The area that is displays information
+Front Porch: an dealy after the v/hSync enters the invisble area
+Sync Pulse: When the Sync pulse is set to 0
+Back Porch: When the Sync Pluse is turned back on, before entering the visible area
+
+
+
+OS 12:
+VGA!!!!!!!!!!!!!!
+
+VGA stands for video graphics array
+VGA is similar to the how we display text, a memory location where you write to that will output to the screen. However, we need to set the card to graphics mode, where we would be able to display color, instead of text. However, it will be really difficult to activate graphics mode right now. If we were in a 16-bit state, we would be able to run the interrupt int 13h or hexdecimal 0x13, which activates the graphics mode. But that is a bios command and is called a bios extention inturputs, so we can't activate them in a 32 bit mode. So we will have to write to the graphics card directly. 
+
+The memory locations we have to write to are fixed, so we don't need dynamic memory, we will just do what we did in the text mode.
+
+OS 12:
+Making our own GUI:

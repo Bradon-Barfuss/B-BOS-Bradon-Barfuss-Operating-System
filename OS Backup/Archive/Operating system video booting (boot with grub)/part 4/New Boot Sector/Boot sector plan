@@ -1,0 +1,5 @@
+Soon we will go back and make my own boot sector and get rid of GRUB
+
+To do this we will remove the files loader.s and linker.ld. and make our own boot sector
+
+but first we want to get progress down so we will go back to this if we have time.

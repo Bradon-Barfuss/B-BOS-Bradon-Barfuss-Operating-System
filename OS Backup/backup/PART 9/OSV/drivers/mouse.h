@@ -1,0 +1,43 @@
+#ifndef __MOUSE_H
+#define __MOUSE_H
+
+#include "/home/bradon/OS/OSV/Interrupts/port.h"
+#include "/home/bradon/OS/OSV/Interrupts/interrupt.h"
+#include "/home/bradon/OS/OSV/types.h"
+#include "/home/bradon/OS/OSV/drivers/driver.h"
+
+class MouseEventHandler{
+public:
+    MouseEventHandler();
+    
+    virtual void OnActivate();
+    virtual void OnMouseDown(uint8_t button);
+    virtual void OnMouseUp(uint8_t button);
+    virtual void OnMouseMove(int xoffset, int yoffset);
+};
+
+class MouseDriver : public InterruptHandler, public Driver{
+    Port8Bit dataport;
+    Port8Bit commandport;
+    
+    uint8_t buffer[3];//the three bytes of information where the mouse is
+    //buffer[0] = x-axis
+    //buffer[1] = y-axis
+    //buffer[2]
+    uint8_t offset;
+    uint8_t buttons;
+    MouseEventHandler* handler;
+    int8_t x, y;
+public:
+    MouseDriver(InterruptManager* manager, MouseEventHandler* handler);
+    ~MouseDriver();
+    virtual uint32_t HandleInterrupt(uint32_t esp);
+    virtual void Activate();
+    
+    
+};
+
+
+
+
+#endif

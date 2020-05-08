@@ -1,0 +1,60 @@
+notes:
+There are currently three parts in the Operating system. First is the boot section, the kernel, and the drivers. The boot section is made of boot_main.asm, boot_disk.asm, print.asm, print_PM.asm, switch_to_pm.asm, gdt.asm and boot_print_hex.asm(which may be removed).
+	1. The boot_main.asm is the boot sector and where the operating system starts. 
+	2. boot_disk.asm is where the program loads the program on the hard drive.
+	3. print.asm is where the program will print text in 16-bit real mode.
+	4. print_PM.asm is where the progra will print text in 32-bit protected mode.
+	5. switch_to_pm.asm is where we will switch from 16-bit real mode to 32-bit protected mode.
+	6. gdt.asm is the Global __ table is where we define what attributes we want in 32-bit protected mode.
+	7. boot_print_hex.asm is a print program in hex, it was made in the tutroials and I didn't delete it yet.
+
+
+
+			CPU Emulators:
+	A CPU emulator is where the emulation behaves like a CPU architecture, which is more effective than vmware who more forcus on visual proformance. We need to give an The emulator a Image file, which is just machine code. (Which is why we can use a bin file). The CPU Emulator we are using is QEmu. In code looks like $qemu <filename>, but we need to set what type of architecture it's running so it should look like qemu-system-x86_64 <filename >or ?(qemu-system-i864 <filename>).
+
+COMMANDS
+1. make mykernel.bin
+2. nasm -f elf -o boot_main.o boot_main.asm
+3. cat mykernel.bin > os-image
+
+		Complie into machine code (nasm):
+The $nasm command is used for compileing assembaly files (.asm) to machine files (.bin). The code looks like:
+
+	$nasm <filename>.asm -f bin -o <filename>.bin
+
+	#The -f bin command is telling nasm to produce raw machine code. The -o is telling nasm to output a file. This should create a new file called <filename>.bin, which we are able to run in qemu.
+
+	We can also the the .bin file in hexdecimal format using the command
+
+	$od -t x1 -A n <filename>.bin
+
+See more about nasm here: https://linux.die.net/man/1/nasm 
+see page 9 in os-dev
+
+
+			Interrupts:
+	Interrupts are a mechanism that allows the cpu to stop what it's doing to do a higher-priorty instruction. Interrupts each have a unique number that has a spefic function. The command is "int 0x##".
+
+see page 11 in os-dev
+
+
+			CPU registers:
+	CPU registers are like varibles but in a CPU level. There are 4 general purpose registers: ax, bx, cx, dx. Each registers a hold a word (two bytes or 16 bits). 
+
+See page 11 in os-dev
+
+
+
+			The boot_main.asm
+	The boot_main.asm is the boot sector and is the main file to set up the Operating system. The computer has a default address to look up boot sectors is 0x7c00. And end with dw 0waa55 at the end of the boot sector we have this line of code:
+
+[org 0x7c00]
+...
+...
+times 510-($-$$) db 0
+dw 0xaa55
+
+	The boot sector is only 512 bytes big so the code 510-($-$$) db 0 will fill the empty space that has no code with zeros. the last line is dw 0waa55 where the boot sector loads. 
+
+	At the start of boot_main.asm is the code [org 0x7c00] which is a global offset

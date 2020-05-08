@@ -1,0 +1,11 @@
+Part 4:
+Hardware communication
+
+This is the part where we will communicate with the hardware
+When you interact with a hardware piece, it will send a signal to the PIC (Programmical interupt controler).
+if we want to get the data from the PIC, we need to program the PIC to send us the information. To do this
+we will have a multplexer and a decomplexer. //look up more info//. We will send data or a number to these
+complexers and they will send or recive data from a port. 
+
+In assembly there is a command called "outb" that is used to do this. Because we are writing this in C++, 
+we will use the asm("") command to use assembly code. 

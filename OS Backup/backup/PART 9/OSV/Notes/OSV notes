@@ -1,0 +1,33 @@
+The OSV folder stands for Operating system video, or the youtube seriers "You to write your own operating system"
+The this document is going to cover each file purpose, order, and other information.
+
+The boot order in this followers linker.ld -> loader.o _> kernel.o.
+
+In order for the linker to combine both of these files, they need to be turned into object files or .o files.
+For assembly .s files, you will use the command "as --32 -o filename.o filename.s"
+For c++ programs, you will need to use the command "g++ $(GCCPARAMS) -c filename.cpp -o filename.o"
+    The -o stands for output or binary
+    The $(GCCPARMS) and --32 are both parmaters
+    The -c Stands for compile.
+The command to link them is "ld $(LDPARAMS) -T mykernel.bin -o linker.ld file1.o file2.o)"
+
+At the beginging of the linker, the is the line called the loader, where the first line of code will start
+
+
+[make file / set up]
+
+The main things that happen in the make file are
+1. convert .asm or .s, .cpp to .o object files
+2. use a linker to combine the .o files into one .bin file (mykernel.bin)
+3. convert .bin file into .iso file
+4. run the .iso file
+
+1.1 the commands to convert .s and .cpp files into .o files are
+CPP: "g++ $(GCCPARAMS) -c filename.cpp -o filename.o
+S: "as (--32 or $(ASPARAMS)) -o filename.o filename.s
+
+1.2 To combine these .o files into a .bin file you use.
+ld $(LDPARAMS) -T binfile.bin -o linker.ld file1.o file2.o
+
+1.3 To convert the .bin file to .iso file you use
+grub-mkrescue --output=mykernel.bin iso

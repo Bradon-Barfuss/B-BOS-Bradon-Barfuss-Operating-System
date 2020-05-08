@@ -1,0 +1,16 @@
+MASTER NOTES
+
+In steps to make the OS are sperated into _ Parts
+0. Make Files
+1. Boot Sector
+	1.1 GRUB
+	1.2 Linker
+2. Setting up the Global Discriptor Table
+	1.1 What is a GDT
+	1.2 How is the segments are seperated
+3. Setting up Hardware
+	1.1 What is a Programmable Interrupt Controller (PIC)
+	1.2 What is a Interrupt Dicscriptor Table (IDT)
+4. Making my own Standard Library
+5. Graphics
+
