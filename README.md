@@ -3,4 +3,4 @@
  
  
 Please visted this website for more information:
-https://bradonbarfuss.wixsite.com/mywebsite
+https://bradonbarfuss.wixsite.com/mywebsite/b-bos
